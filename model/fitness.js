@@ -43,7 +43,7 @@ const workSchema = new Schema({
   },
 
   // utilizing top schema
-  exercise: [exerSchema],
+  exercises: [exerSchema],
 });
 
 const Workout = mongoose.model("Workout", workSchema);
