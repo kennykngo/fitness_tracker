@@ -18,12 +18,16 @@ module.exports = {
       db.Workout.find({})
         .then((allWorkouts) => res.send(allWorkouts))
         .catch((err) => res.send(err));
+    } else {
+      db.Workout.findById(req.query.id)
+        .then((foundWorkout) => res.send(foundWorkout))
+        .catch((err) => res.send(err));
     }
   },
 
   addExercise: async (req, res) => {
     try {
-      const workout = await db.Wokrout.findById(req.params.id);
+      const workout = await db.Workout.findById(req.params.id);
 
       // workout.exercises is an array
       workout.exercises.push(req.body);
@@ -32,6 +36,10 @@ module.exports = {
         console.log("exercise", exercise);
         totalDuration = totalDuration + exercise.duration;
       });
+      workout.totalDuration = totalDuration;
+      await workout.save();
+      res.send(workout);
+      console.log(workout);
     } catch (err) {
       res.send(err);
     }
