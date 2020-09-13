@@ -1,5 +1,5 @@
 const express = require("express");
-const { Mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -8,9 +8,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
 // connecting mongoose
+// process.env.MONGODB_URI for Heroku
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-  useUnifiedTopolgy: true,
-  useNewUrlParse: true,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
 });

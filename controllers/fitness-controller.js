@@ -1,7 +1,7 @@
 const db = require("../models/fitness");
 // requires Workout from fitness.js
 
-const fitnessController = () => {
+module.exports = {
   newWorkout: (req, res) => {
     db.Workout.create(req.body)
       .then((workout) => {
@@ -11,7 +11,7 @@ const fitnessController = () => {
         // .json() returns the res to the client in addition to setting it to json
         res.json(err);
       });
-  };
+  },
 
   getWorkout: (req, res) => {
     if (!req.query.id) {
@@ -19,7 +19,7 @@ const fitnessController = () => {
         .then((allWorkouts) => res.send(allWorkouts))
         .catch((err) => res.send(err));
     }
-  };
+  },
 
   addExercise: async (req, res) => {
     try {
@@ -35,13 +35,11 @@ const fitnessController = () => {
     } catch (err) {
       res.send(err);
     }
-  };
+  },
 
   deleteWorkout: (req, res) => {
     db.Workout.findByIdAndDelete(req.query.id)
       .then(() => res.send({ msg: "success" }))
       .catch((err) => res.send(err));
-  };
+  },
 };
-
-module.exports = fitnessController;
