@@ -7,6 +7,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
+var myLogger = function (req, res, next) {
+  console.log(req.path);
+  next();
+};
+app.use(myLogger);
+
 // connecting mongoose
 mongoose.connect("mongodb://localhost/workout", {
   useUnifiedTopology: true,
