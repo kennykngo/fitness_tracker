@@ -14,6 +14,7 @@ var myLogger = function (req, res, next) {
 app.use(myLogger);
 
 // connecting mongoose
+// process.env.MONGODB_URI ||
 mongoose.connect("mongodb://localhost/workout", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
